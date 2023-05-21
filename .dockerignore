@@ -4,6 +4,7 @@
 .git/
 .gitignore
 .vagrant/
+.tmp-earthly-out/
 
 contrib/
 docs/
