@@ -94,12 +94,8 @@ docker-base-2:
       echo 'path-exclude /usr/share/linda/*'         >> /etc/dpkg/dpkg.cfg.d/01_nodoc
 
 docker-base-3:
-  ARG CODENAME=xenial
-  ARG REVISION=20210804
-  # ARG CODENAME=bionic
-  # ARG REVISION=20220531
-
-  FROM ubuntu:${CODENAME}-${REVISION}
+  FROM ubuntu:xenial-20210804
+  # FROM ubuntu:bionic-20220531
 
 docker-base:
   # FROM DOCKERFILE \
