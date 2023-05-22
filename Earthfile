@@ -49,10 +49,10 @@ docker-base:
   FROM ailispaw/ubuntu-essential:16.04-nodoc
   # FROM ailispaw/ubuntu-essential:18.04-nodoc
 
-  ENV TERM=xterm \
-      SYSLINUX_SITE=https://mirrors.edge.kernel.org/ubuntu/pool/main/s/syslinux \
-      SYSLINUX_VERSION=4.05+dfsg-6+deb8u1
-      # SYSLINUX_VERSION=6.03+dfsg1-2
+  ARG TERM=xterm
+  ARG SYSLINUX_SITE=https://mirrors.edge.kernel.org/ubuntu/pool/main/s/syslinux
+  ARG SYSLINUX_VERSION=4.05+dfsg-6+deb8u1
+  # ARG SYSLINUX_VERSION=6.03+dfsg1-2
 
   ENV DEBIAN_FRONTEND=noninteractive
   RUN set -x \
@@ -63,23 +63,23 @@ docker-base:
         bc build-essential cpio file git python unzip rsync wget \
         syslinux syslinux-common isolinux xorriso dosfstools mtools \
         python3 jq \
-      # && wget -q "${SYSLINUX_SITE}/syslinux-common_${SYSLINUX_VERSION}_all.deb" \
-      # && wget -q "${SYSLINUX_SITE}/syslinux_${SYSLINUX_VERSION}_amd64.deb" \
-      # && dpkg -i "syslinux-common_${SYSLINUX_VERSION}_all.deb" \
-      # && dpkg -i "syslinux_${SYSLINUX_VERSION}_amd64.deb" \
-      # && rm -f "syslinux-common_${SYSLINUX_VERSION}_all.deb" \
-      # && rm -f "syslinux_${SYSLINUX_VERSION}_amd64.deb" \
+      && wget -q "${SYSLINUX_SITE}/syslinux-common_${SYSLINUX_VERSION}_all.deb" \
+      && wget -q "${SYSLINUX_SITE}/syslinux_${SYSLINUX_VERSION}_amd64.deb" \
+      && dpkg -i "syslinux-common_${SYSLINUX_VERSION}_all.deb" \
+      && dpkg -i "syslinux_${SYSLINUX_VERSION}_amd64.deb" \
+      && rm -f "syslinux-common_${SYSLINUX_VERSION}_all.deb" \
+      && rm -f "syslinux_${SYSLINUX_VERSION}_amd64.deb" \
       && apt-get clean \
       && rm -rf /var/cache/apt/* /var/lib/apt/lists/* /var/cache/debconf/* /var/log/*
 
   # Setup environment
-  ENV SRC_DIR=/build \
-      OVERLAY=/overlay \
-      BR_ROOT=/build/buildroot
+  ARG SRC_DIR=/build
+  ARG OVERLAY=/overlay
+  ARG BR_ROOT=/build/buildroot
   RUN mkdir -p ${SRC_DIR} ${OVERLAY}
 
-  ENV BR_VERSION 2022.05
-  # ENV BR_VERSION 2023.02.1
+  ARG BR_VERSION=2022.05
+  # ARG BR_VERSION=2023.02.1
   RUN wget -qO- https://buildroot.org/downloads/buildroot-${BR_VERSION}.tar.xz | tar xJ && \
       mv buildroot-${BR_VERSION} ${BR_ROOT}
 
@@ -103,8 +103,8 @@ docker-base:
       chmod +x usr/share/bash-completion/bash_completion
 
   # Add Docker
-  ENV DOCKER_VERSION 1.10.3
-  ENV DOCKER_REVISION barge.2
+  ARG DOCKER_VERSION=1.10.3
+  ARG DOCKER_REVISION=barge.2
   RUN mkdir -p usr/bin && \
       wget -qO- https://github.com/bargees/moby/releases/download/v${DOCKER_VERSION}-${DOCKER_REVISION}/docker-${DOCKER_VERSION}-${DOCKER_REVISION}.tar.xz | tar xJ -C usr/bin
 
@@ -112,12 +112,12 @@ docker-base:
   RUN wget -qO usr/share/bash-completion/completions/docker https://raw.githubusercontent.com/moby/moby/v${DOCKER_VERSION}/contrib/completion/bash/docker
 
   # Add dumb-init
-  ENV DINIT_VERSION 1.2.5
+  ARG DINIT_VERSION=1.2.5
   RUN mkdir -p usr/bin && \
       wget -qO usr/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v${DINIT_VERSION}/dumb-init_${DINIT_VERSION}_x86_64 && \
       chmod +x usr/bin/dumb-init
 
-  ENV VERSION 2.15.0
+  ARG VERSION=2.15.0
   RUN mkdir -p etc && \
       echo "Welcome to Barge ${VERSION}, Docker version ${DOCKER_VERSION}" > etc/motd && \
       echo "NAME=\"Barge\"" > etc/os-release && \
