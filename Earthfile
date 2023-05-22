@@ -44,13 +44,59 @@ SAVE_SELF:
   # target
 
 docker-base-1:
-  FROM ailispaw/ubuntu-essential:16.04-nodoc
+  # FROM ailispaw/ubuntu-essential:16.04-nodoc
   # FROM ailispaw/ubuntu-essential:18.04-nodoc
+
+  ARG CODENAME=xenial
+  ARG REVISION=20210804
+  # ARG CODENAME=bionic
+  # ARG REVISION=20220531
+
+  FROM ubuntu:${CODENAME}-${REVISION}
+  # 16
+  # Make an exception for apt: it gets deselected, even though it probably shouldn't.
+  RUN export DEBIAN_FRONTEND=noninteractive && \
+      dpkg --clear-selections && echo "apt install" | dpkg --set-selections && \
+      apt-get --purge -y dselect-upgrade && \
+      apt-get purge -y --allow-remove-essential init systemd && \
+      apt-get purge -y libapparmor1 libcap2 libcryptsetup4 libdevmapper1.02.1 libkmod2 libseccomp2 && \
+      apt-get --purge -y autoremove && \
+      dpkg-query -Wf '\${db:Status-Abbrev}\t\${binary:Package}\n' | \
+        grep '^.i' | awk -F'\t' '{print \$2 " install"}' | dpkg --set-selections && \
+      rm -rf /var/cache/apt /var/lib/apt/lists /var/cache/debconf/* /var/log/*
+  # 18
+  # # Make an exception for apt: it gets deselected, even though it probably shouldn't.
+  # RUN export DEBIAN_FRONTEND=noninteractive && \
+  #     dpkg --clear-selections && \
+  #     echo "apt install" | dpkg --set-selections && \
+  #     echo "mount install" | dpkg --set-selections && \
+  #     apt-get --purge -y dselect-upgrade && \
+  #     dpkg-query -Wf '\${db:Status-Abbrev}\t\${binary:Package}\n' | \
+  #       grep '^.i' | awk -F'\t' '{print \$2 " install"}' | dpkg --set-selections && \
+  #     rm -rf /var/cache/apt /var/lib/apt/lists /var/cache/debconf/* /var/log/*
+
+docker-base-2:
+  FROM +docker-base-1
+
+  # https://github.com/kubernetes/contrib/blob/master/images/ubuntu-slim/Dockerfile.build#L28-L50
+  RUN cd /usr/share && \
+      tar zcf copyrights.tar.gz common-licenses doc/*/copyright && \
+      rm -rf common-licenses doc man groff info lintian linda locale
+
+  # https://wiki.ubuntu.com/ReducingDiskFootprint
+  RUN echo 'path-exclude /usr/share/doc/*'            > /etc/dpkg/dpkg.cfg.d/01_nodoc && \
+      echo 'path-include /usr/share/doc/*/copyright' >> /etc/dpkg/dpkg.cfg.d/01_nodoc && \
+      echo 'path-exclude /usr/share/man/*'           >> /etc/dpkg/dpkg.cfg.d/01_nodoc && \
+      echo 'path-exclude /usr/share/groff/*'         >> /etc/dpkg/dpkg.cfg.d/01_nodoc && \
+      echo 'path-exclude /usr/share/info/*'          >> /etc/dpkg/dpkg.cfg.d/01_nodoc && \
+      echo 'path-exclude /usr/share/lintian/*'       >> /etc/dpkg/dpkg.cfg.d/01_nodoc && \
+      echo 'path-exclude /usr/share/linda/*'         >> /etc/dpkg/dpkg.cfg.d/01_nodoc
+
 
 docker-base:
   # FROM DOCKERFILE \
   #   .  
-  FROM +docker-base-1
+  FROM +docker-base-2
 
   ARG TERM=xterm
   ARG SYSLINUX_SITE=https://mirrors.edge.kernel.org/ubuntu/pool/main/s/syslinux
