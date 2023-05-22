@@ -54,17 +54,23 @@ docker-base:
       SYSLINUX_VERSION=4.05+dfsg-6+deb8u1
       # SYSLINUX_VERSION=6.03+dfsg1-2
 
-  RUN apt-get -q update && \
-      apt-get -q -y install --no-install-recommends ca-certificates \
+  ENV DEBIAN_FRONTEND=noninteractive
+  RUN set -x \
+      && apt-get --assume-yes update \
+      && apt-get --assume-yes upgrade \
+      && apt-get --assume-yes install --no-install-recommends \
+        ca-certificates \
         bc build-essential cpio file git python unzip rsync wget \
-        syslinux syslinux-common isolinux xorriso dosfstools mtools && \
-      wget -q "${SYSLINUX_SITE}/syslinux-common_${SYSLINUX_VERSION}_all.deb" && \
-      wget -q "${SYSLINUX_SITE}/syslinux_${SYSLINUX_VERSION}_amd64.deb" && \
-      dpkg -i "syslinux-common_${SYSLINUX_VERSION}_all.deb" && \
-      dpkg -i "syslinux_${SYSLINUX_VERSION}_amd64.deb" && \
-      rm -f "syslinux-common_${SYSLINUX_VERSION}_all.deb" && \
-      rm -f "syslinux_${SYSLINUX_VERSION}_amd64.deb" && \
-      apt-get clean && rm -rf /var/cache/apt/* /var/lib/apt/lists/* /var/cache/debconf/* /var/log/*
+        syslinux syslinux-common isolinux xorriso dosfstools mtools \
+        python3 jq \
+      && wget -q "${SYSLINUX_SITE}/syslinux-common_${SYSLINUX_VERSION}_all.deb" \
+      && wget -q "${SYSLINUX_SITE}/syslinux_${SYSLINUX_VERSION}_amd64.deb" \
+      && dpkg -i "syslinux-common_${SYSLINUX_VERSION}_all.deb" \
+      && dpkg -i "syslinux_${SYSLINUX_VERSION}_amd64.deb" \
+      && rm -f "syslinux-common_${SYSLINUX_VERSION}_all.deb" \
+      && rm -f "syslinux_${SYSLINUX_VERSION}_amd64.deb" \
+      && apt-get clean \
+      && rm -rf /var/cache/apt/* /var/lib/apt/lists/* /var/cache/debconf/* /var/log/*
 
   # Setup environment
   ENV SRC_DIR=/build \
