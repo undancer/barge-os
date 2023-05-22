@@ -63,12 +63,12 @@ docker-base:
         bc build-essential cpio file git python unzip rsync wget \
         syslinux syslinux-common isolinux xorriso dosfstools mtools \
         python3 jq \
-      && wget -q "${SYSLINUX_SITE}/syslinux-common_${SYSLINUX_VERSION}_all.deb" \
-      && wget -q "${SYSLINUX_SITE}/syslinux_${SYSLINUX_VERSION}_amd64.deb" \
-      && dpkg -i "syslinux-common_${SYSLINUX_VERSION}_all.deb" \
-      && dpkg -i "syslinux_${SYSLINUX_VERSION}_amd64.deb" \
-      && rm -f "syslinux-common_${SYSLINUX_VERSION}_all.deb" \
-      && rm -f "syslinux_${SYSLINUX_VERSION}_amd64.deb" \
+      # && wget -q "${SYSLINUX_SITE}/syslinux-common_${SYSLINUX_VERSION}_all.deb" \
+      # && wget -q "${SYSLINUX_SITE}/syslinux_${SYSLINUX_VERSION}_amd64.deb" \
+      # && dpkg -i "syslinux-common_${SYSLINUX_VERSION}_all.deb" \
+      # && dpkg -i "syslinux_${SYSLINUX_VERSION}_amd64.deb" \
+      # && rm -f "syslinux-common_${SYSLINUX_VERSION}_all.deb" \
+      # && rm -f "syslinux_${SYSLINUX_VERSION}_amd64.deb" \
       && apt-get clean \
       && rm -rf /var/cache/apt/* /var/lib/apt/lists/* /var/cache/debconf/* /var/log/*
 
