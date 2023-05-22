@@ -93,11 +93,18 @@ docker-base-2:
       echo 'path-exclude /usr/share/lintian/*'       >> /etc/dpkg/dpkg.cfg.d/01_nodoc && \
       echo 'path-exclude /usr/share/linda/*'         >> /etc/dpkg/dpkg.cfg.d/01_nodoc
 
+docker-base-3:
+  ARG CODENAME=xenial
+  ARG REVISION=20210804
+  # ARG CODENAME=bionic
+  # ARG REVISION=20220531
+
+  FROM ubuntu:${CODENAME}-${REVISION}
 
 docker-base:
   # FROM DOCKERFILE \
   #   .  
-  FROM +docker-base-2
+  FROM +docker-base-3
 
   ARG TERM=xterm
   ARG SYSLINUX_SITE=https://mirrors.edge.kernel.org/ubuntu/pool/main/s/syslinux
