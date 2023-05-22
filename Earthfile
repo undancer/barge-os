@@ -94,11 +94,11 @@ docker-base-2:
   #     echo 'path-exclude /usr/share/linda/*'         >> /etc/dpkg/dpkg.cfg.d/01_nodoc
 
 docker-base-3:
-  # FROM ubuntu:xenial-20210804
+  FROM ubuntu:xenial-20210804
   # FROM ubuntu:bionic-20220531
   # FROM ailispaw/ubuntu-essential:16.04-nodoc
   # FROM ailispaw/ubuntu-essential:16.04
-  FROM +docker-base-2
+  # FROM +docker-base-2
 
 docker-base:
   # FROM DOCKERFILE \
