@@ -79,19 +79,19 @@ docker-base-1:
 docker-base-2:
   FROM +docker-base-1
 
-  # https://github.com/kubernetes/contrib/blob/master/images/ubuntu-slim/Dockerfile.build#L28-L50
-  RUN cd /usr/share && \
-      tar zcf copyrights.tar.gz common-licenses doc/*/copyright && \
-      rm -rf common-licenses doc man groff info lintian linda locale
+  # # https://github.com/kubernetes/contrib/blob/master/images/ubuntu-slim/Dockerfile.build#L28-L50
+  # RUN cd /usr/share && \
+  #     tar zcf copyrights.tar.gz common-licenses doc/*/copyright && \
+  #     rm -rf common-licenses doc man groff info lintian linda locale
 
-  # https://wiki.ubuntu.com/ReducingDiskFootprint
-  RUN echo 'path-exclude /usr/share/doc/*'            > /etc/dpkg/dpkg.cfg.d/01_nodoc && \
-      echo 'path-include /usr/share/doc/*/copyright' >> /etc/dpkg/dpkg.cfg.d/01_nodoc && \
-      echo 'path-exclude /usr/share/man/*'           >> /etc/dpkg/dpkg.cfg.d/01_nodoc && \
-      echo 'path-exclude /usr/share/groff/*'         >> /etc/dpkg/dpkg.cfg.d/01_nodoc && \
-      echo 'path-exclude /usr/share/info/*'          >> /etc/dpkg/dpkg.cfg.d/01_nodoc && \
-      echo 'path-exclude /usr/share/lintian/*'       >> /etc/dpkg/dpkg.cfg.d/01_nodoc && \
-      echo 'path-exclude /usr/share/linda/*'         >> /etc/dpkg/dpkg.cfg.d/01_nodoc
+  # # https://wiki.ubuntu.com/ReducingDiskFootprint
+  # RUN echo 'path-exclude /usr/share/doc/*'            > /etc/dpkg/dpkg.cfg.d/01_nodoc && \
+  #     echo 'path-include /usr/share/doc/*/copyright' >> /etc/dpkg/dpkg.cfg.d/01_nodoc && \
+  #     echo 'path-exclude /usr/share/man/*'           >> /etc/dpkg/dpkg.cfg.d/01_nodoc && \
+  #     echo 'path-exclude /usr/share/groff/*'         >> /etc/dpkg/dpkg.cfg.d/01_nodoc && \
+  #     echo 'path-exclude /usr/share/info/*'          >> /etc/dpkg/dpkg.cfg.d/01_nodoc && \
+  #     echo 'path-exclude /usr/share/lintian/*'       >> /etc/dpkg/dpkg.cfg.d/01_nodoc && \
+  #     echo 'path-exclude /usr/share/linda/*'         >> /etc/dpkg/dpkg.cfg.d/01_nodoc
 
 docker-base-3:
   # FROM ubuntu:xenial-20210804
