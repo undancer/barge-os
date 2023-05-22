@@ -1,6 +1,6 @@
 VERSION 0.7
 
-FROM alpine:3.15
+FROM library/alpine:3.18
 
 COPY_SELF:
   COMMAND
@@ -23,26 +23,32 @@ SAVE_SELF:
   #     END
   #   END
   # END
-  IF [ -d ./output ]
-    RUN ls -d ./output/*
-  END
+  # IF [ -d ./output ]
+  #   RUN ls -d ./output/*
+  # END
 
-  IF [ -d ./output/images ]
-    RUN ls -d ./output/images/*
-  END
+  # IF [ -d ./output/images ]
+  #   RUN ls -d ./output/images/*
+  # END
 
   SAVE ARTIFACT --if-exists ./output/images/* AS LOCAL ./output/images/
   SAVE ARTIFACT --if-exists ./dl/* AS LOCAL ./output/dl/
   SAVE ARTIFACT --if-exists ./ccache/* AS LOCAL ./output/ccache/
+  SAVE ARTIFACT --if-exists ./.config AS LOCAL ./output/buildroot.config
+  SAVE ARTIFACT --if-exists ./defconfig AS LOCAL ./output/buildroot.defconfig
+
   # build
   # host
   # images
   # staging
   # target
 
-docker:
+docker-base:
   FROM DOCKERFILE \
-    .
+    .  
+
+docker:
+  FROM +docker-base
   
   # RUN sed -i -E 's/(archive|security).ubuntu.com/mirrors.163.com/g' /etc/apt/sources.list
   ENV DEBIAN_FRONTEND=noninteractive
@@ -75,8 +81,7 @@ source:
   #       done;
   RUN make source;
 
-  DO +SAVE_SELF
-  # DO +SAVE_SELF --output=./output
+  DO +SAVE_SELF --output=./output
 
   # SAVE ARTIFACT [--keep-ts] [--keep-own] [--if-exists] [--force] <src> [<artifact-dest-path>] [AS LOCAL <local-path>]
 
@@ -99,7 +104,10 @@ build:
 
   DO +COPY_SELF
 
-  RUN --privileged make --quiet
+  RUN make savedefconfig
+
+  # RUN --privileged make --quiet
+  RUN --privileged make
 
   # RUN ls -d ./output/*
 
@@ -107,8 +115,7 @@ build:
   #   RUN echo ">>>> $dir"
   # END
 
-  DO +SAVE_SELF
-  # DO +SAVE_SELF --output=./output
+  DO +SAVE_SELF --output=./output
 
 all:
   BUILD +docker

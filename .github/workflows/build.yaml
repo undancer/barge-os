@@ -11,6 +11,7 @@ on:
   push:
     branches:
       - "develop"
+      - "feature/*"
       - "master"
       - "main"
     # # Publish semver tags as releases.

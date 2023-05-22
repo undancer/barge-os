@@ -1,8 +1,10 @@
 FROM ailispaw/ubuntu-essential:16.04-nodoc
+# FROM ailispaw/ubuntu-essential:18.04-nodoc
 
 ENV TERM=xterm \
     SYSLINUX_SITE=https://mirrors.edge.kernel.org/ubuntu/pool/main/s/syslinux \
     SYSLINUX_VERSION=4.05+dfsg-6+deb8u1
+    # SYSLINUX_VERSION=6.03+dfsg1-2
 
 RUN apt-get -q update && \
     apt-get -q -y install --no-install-recommends ca-certificates \
@@ -23,6 +25,7 @@ ENV SRC_DIR=/build \
 RUN mkdir -p ${SRC_DIR} ${OVERLAY}
 
 ENV BR_VERSION 2022.05
+# ENV BR_VERSION 2023.02.1
 RUN wget -qO- https://buildroot.org/downloads/buildroot-${BR_VERSION}.tar.xz | tar xJ && \
     mv buildroot-${BR_VERSION} ${BR_ROOT}
 
