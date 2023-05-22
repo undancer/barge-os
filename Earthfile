@@ -46,8 +46,8 @@ SAVE_SELF:
 docker-base:
   # FROM DOCKERFILE \
   #   .  
-  FROM ubuntu:xenial-20210804
-  # FROM ubuntu:bionic-20220531
+  # FROM ubuntu:xenial-20210804
+  FROM ubuntu:bionic-20220531
 
   ARG TERM=xterm
   ARG SYSLINUX_SITE=https://mirrors.edge.kernel.org/ubuntu/pool/main/s/syslinux
