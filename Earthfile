@@ -56,7 +56,8 @@ docker-base-1:
   # 16
   # Make an exception for apt: it gets deselected, even though it probably shouldn't.
   RUN export DEBIAN_FRONTEND=noninteractive && \
-      dpkg --clear-selections && echo "apt install" | dpkg --set-selections && \
+      dpkg --clear-selections && \
+      echo "apt install" | dpkg --set-selections && \
       apt-get --purge -y dselect-upgrade && \
       apt-get purge -y --allow-remove-essential init systemd && \
       apt-get purge -y libapparmor1 libcap2 libcryptsetup4 libdevmapper1.02.1 libkmod2 libseccomp2 && \
