@@ -43,11 +43,14 @@ SAVE_SELF:
   # staging
   # target
 
+docker-base-1:
+  FROM ailispaw/ubuntu-essential:16.04-nodoc
+  # FROM ailispaw/ubuntu-essential:18.04-nodoc
+
 docker-base:
   # FROM DOCKERFILE \
   #   .  
-  FROM ailispaw/ubuntu-essential:16.04-nodoc
-  # FROM ailispaw/ubuntu-essential:18.04-nodoc
+  FROM +docker-base-1
 
   ARG TERM=xterm
   ARG SYSLINUX_SITE=https://mirrors.edge.kernel.org/ubuntu/pool/main/s/syslinux
