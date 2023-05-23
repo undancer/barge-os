@@ -137,6 +137,11 @@ ${STRIP} --remove-section=.comment --remove-section=.note ${ROOTFS}/usr/bin/loca
 # Install C.UTF-8 locale
 mkdir -p ${ROOTFS}/usr/lib/locale
 I18NPATH=${STAGING_DIR}/usr/share/i18n:/usr/share/i18n \
-  /usr/bin/localedef --force --quiet --no-archive --little-endian --prefix=${ROOTFS} \
+  /usr/bin/localedef \
+    --force \
+    --quiet \
+    --no-archive \
+    --little-endian \
+    --prefix=${ROOTFS} \
     -i POSIX -f UTF-8 C.UTF-8
 mv ${ROOTFS}/usr/lib/locale/C.utf8 ${ROOTFS}/usr/lib/locale/C.UTF-8
