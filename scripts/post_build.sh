@@ -89,14 +89,14 @@ mkdir -p var/run
 mkdir -p var/spool
 mkdir -p var/lib/misc
 
-# # Change shell for root
-# sed -i '/^root/s!/bin/sh!/bin/bash!' ${ROOTFS}/etc/passwd
+# Change shell for root
+sed -i '/^root/s!/bin/sh!/bin/bash!' ${ROOTFS}/etc/passwd
 
-# # Copy /etc/skel manually, because buildroot won't copy it with BR2_ROOTFS_USERS_TABLES.
-# cp -R ${ROOTFS}/etc/skel/. ${ROOTFS}/root
-# mkdir -p ${ROOTFS}/home/bargee
-# cp -R ${ROOTFS}/etc/skel/. ${ROOTFS}/home/bargee
-# # chowd -R bargee:bargees ${ROOTFS}/home/bargee will be performed with BR2_ROOTFS_DEVICE_TABLE.
+# Copy /etc/skel manually, because buildroot won't copy it with BR2_ROOTFS_USERS_TABLES.
+cp -R ${ROOTFS}/etc/skel/. ${ROOTFS}/root
+mkdir -p ${ROOTFS}/home/bargee
+cp -R ${ROOTFS}/etc/skel/. ${ROOTFS}/home/bargee
+# chowd -R bargee:bargees ${ROOTFS}/home/bargee will be performed with BR2_ROOTFS_DEVICE_TABLE.
 
 # # Link shutdown scripts
 # cd ${ROOTFS}/sbin/
