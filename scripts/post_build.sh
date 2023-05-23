@@ -109,23 +109,23 @@ done
 cd ${ROOTFS}/etc/init.d/
 ln -s docker S60docker
 
-# # Disable SSH Use DNS
-# if ! grep -q "^UseDNS no" ${ROOTFS}/etc/ssh/sshd_config; then
-#   echo "UseDNS no" >> ${ROOTFS}/etc/ssh/sshd_config
-# fi
+# Disable SSH Use DNS
+if ! grep -q "^UseDNS no" ${ROOTFS}/etc/ssh/sshd_config; then
+  echo "UseDNS no" >> ${ROOTFS}/etc/ssh/sshd_config
+fi
 
-# # Disable ARP probing at local network for speed up
-# if ! grep -q "^noarp" ${ROOTFS}/etc/dhcpcd.conf; then
-#   echo "noarp" >> ${ROOTFS}/etc/dhcpcd.conf
-# fi
-# if ! grep -q "^noipv6rs" ${ROOTFS}/etc/dhcpcd.conf; then
-#   echo "noipv6rs" >> ${ROOTFS}/etc/dhcpcd.conf
-# fi
+# Disable ARP probing at local network for speed up
+if ! grep -q "^noarp" ${ROOTFS}/etc/dhcpcd.conf; then
+  echo "noarp" >> ${ROOTFS}/etc/dhcpcd.conf
+fi
+if ! grep -q "^noipv6rs" ${ROOTFS}/etc/dhcpcd.conf; then
+  echo "noipv6rs" >> ${ROOTFS}/etc/dhcpcd.conf
+fi
 
-# # Set CA certificate to global wgetrc
-# if ! grep -q "^ca_certificate =" ${ROOTFS}/etc/wgetrc; then
-#   echo "ca_certificate = /etc/ssl/certs/ca-certificates.crt" >> ${ROOTFS}/etc/wgetrc
-# fi
+# Set CA certificate to global wgetrc
+if ! grep -q "^ca_certificate =" ${ROOTFS}/etc/wgetrc; then
+  echo "ca_certificate = /etc/ssl/certs/ca-certificates.crt" >> ${ROOTFS}/etc/wgetrc
+fi
 
 # STAGING_DIR=${ROOTFS}/../host/${GNU_TARGET_NAME}/sysroot
 
