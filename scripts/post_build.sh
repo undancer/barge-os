@@ -98,16 +98,16 @@ mkdir -p ${ROOTFS}/home/bargee
 cp -R ${ROOTFS}/etc/skel/. ${ROOTFS}/home/bargee
 # chowd -R bargee:bargees ${ROOTFS}/home/bargee will be performed with BR2_ROOTFS_DEVICE_TABLE.
 
-# # Link shutdown scripts
-# cd ${ROOTFS}/sbin/
-# for i in halt reboot poweroff; do
-#   rm -f $i
-#   ln -s shutdown $i
-# done
+# Link shutdown scripts
+cd ${ROOTFS}/sbin/
+for i in halt reboot poweroff; do
+  rm -f $i
+  ln -s shutdown $i
+done
 
-# # Link the docker script for SysV init
-# cd ${ROOTFS}/etc/init.d/
-# ln -s docker S60docker
+# Link the docker script for SysV init
+cd ${ROOTFS}/etc/init.d/
+ln -s docker S60docker
 
 # # Disable SSH Use DNS
 # if ! grep -q "^UseDNS no" ${ROOTFS}/etc/ssh/sshd_config; then
