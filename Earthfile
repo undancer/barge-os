@@ -44,6 +44,10 @@ SAVE_SELF:
   # target
 
 docker-base-debian:
+  # FROM ghcr.io/undancer/buildroot:latest
+
+  # USER root
+
   FROM debian:bullseye-20210902
 
   # Setup environment
