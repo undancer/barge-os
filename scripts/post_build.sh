@@ -142,14 +142,23 @@ ls -al ${ROOTFS}/usr/lib/locale/
 
 # Install C.UTF-8 locale
 mkdir -p ${ROOTFS}/usr/lib/locale
-I18NPATH=${STAGING_DIR}/usr/share/i18n:/usr/share/i18n \
-  /usr/bin/localedef \
-    --force \
+# I18NPATH=${STAGING_DIR}/usr/share/i18n:/usr/share/i18n \
+#   /usr/bin/localedef \
+#     --force \
+#     --quiet \
+#     --no-archive \
+#     --little-endian \
+#     --prefix=${ROOTFS} \
+#     -i POSIX -f UTF-8 C.UTF-8
+
+# I18NPATH=${STAGING_DIR}/usr/share/i18n:/usr/share/i18n \
+  # /usr/bin/localedef \
+    # --force \
     # --quiet \
-    --no-archive \
-    --little-endian \
-    --prefix=${ROOTFS} \
-    -i POSIX -f UTF-8 C.UTF-8
+    # --no-archive \
+    # --little-endian \
+    # --prefix=${ROOTFS} \
+  /usr/bin/localedef -i POSIX -f UTF-8 C.UTF-8
 
 ls -al ${ROOTFS}/usr/lib/locale/
 
