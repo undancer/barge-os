@@ -134,10 +134,11 @@ install -m 0755 -D ${STAGING_DIR}/usr/bin/locale ${ROOTFS}/usr/bin/locale
 STRIP=${GNU_TARGET_NAME}-strip
 ${STRIP} --remove-section=.comment --remove-section=.note ${ROOTFS}/usr/bin/locale
 
-ls -al ${STAGING_DIR}
-ls -al ${STAGING_DIR}/usr
-ls -al ${STAGING_DIR}/usr/share
-ls -al ${STAGING_DIR}/usr/share/i18n
+# ls -al ${STAGING_DIR}
+# ls -al ${STAGING_DIR}/usr
+# ls -al ${STAGING_DIR}/usr/share
+# ls -al ${STAGING_DIR}/usr/share/i18n
+ls -al ${ROOTFS}/usr/lib/locale/
 
 # Install C.UTF-8 locale
 mkdir -p ${ROOTFS}/usr/lib/locale
