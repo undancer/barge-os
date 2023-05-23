@@ -11,27 +11,27 @@ rsync -a --ignore-times \
   --chmod=u=rwX,go=rX --exclude .empty --exclude '*~' \
   package/skeleton-init-sysv/skeleton/ ${ROOTFS}/
 
-# # Remove useless kernel modules, based on unclejack/debian2docker
-# cd ${ROOTFS}/lib/modules
-# rm -rf ./*/kernel/build
-# rm -rf ./*/kernel/source
-# rm -rf ./*/kernel/sound/*
-# rm -rf ./*/kernel/drivers/gpu/*
-# rm -rf ./*/kernel/drivers/infiniband/*
-# rm -rf ./*/kernel/drivers/isdn/*
-# rm -rf ./*/kernel/drivers/media/*
-# rm -rf ./*/kernel/drivers/staging/lustre/*
-# rm -rf ./*/kernel/drivers/staging/comedi/*
-# rm -rf ./*/kernel/fs/ocfs2/*
-# rm -rf ./*/kernel/fs/reiserfs/*
-# rm -rf ./*/kernel/net/bluetooth/*
-# rm -rf ./*/kernel/net/mac80211/*
-# rm -rf ./*/kernel/net/wireless/*
+# Remove useless kernel modules, based on unclejack/debian2docker
+cd ${ROOTFS}/lib/modules
+rm -rf ./*/kernel/build
+rm -rf ./*/kernel/source
+rm -rf ./*/kernel/sound/*
+rm -rf ./*/kernel/drivers/gpu/*
+rm -rf ./*/kernel/drivers/infiniband/*
+rm -rf ./*/kernel/drivers/isdn/*
+rm -rf ./*/kernel/drivers/media/*
+rm -rf ./*/kernel/drivers/staging/lustre/*
+rm -rf ./*/kernel/drivers/staging/comedi/*
+rm -rf ./*/kernel/fs/ocfs2/*
+rm -rf ./*/kernel/fs/reiserfs/*
+rm -rf ./*/kernel/net/bluetooth/*
+rm -rf ./*/kernel/net/mac80211/*
+rm -rf ./*/kernel/net/wireless/*
 
-# # Strip kernel modules
-# GNU_TARGET_NAME=x86_64-buildroot-linux-gnu
-# OBJCOPY=${GNU_TARGET_NAME}-objcopy
-# find . -type f -name '*.ko' | xargs -n 1 ${OBJCOPY} --strip-unneeded
+# Strip kernel modules
+GNU_TARGET_NAME=x86_64-buildroot-linux-gnu
+OBJCOPY=${GNU_TARGET_NAME}-objcopy
+find . -type f -name '*.ko' | xargs -n 1 ${OBJCOPY} --strip-unneeded
 
 # # Remove unnecessary files
 # cd ${ROOTFS}
