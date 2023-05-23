@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e -x -v
+set -e -x
 
 # Add the basics startup scripts
 cp -f ${OVERLAY}/etc/init.d/* package/initscripts/init.d/

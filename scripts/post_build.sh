@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e -x -v
+set -e -x
 
 ROOTFS=$1
 
