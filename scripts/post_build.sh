@@ -137,6 +137,7 @@ ${STRIP} --remove-section=.comment --remove-section=.note ${ROOTFS}/usr/bin/loca
 ls -al ${STAGING_DIR}
 ls -al ${STAGING_DIR}/usr
 ls -al ${STAGING_DIR}/usr/share
+ls -al ${STAGING_DIR}/usr/share/i18n
 
 # Install C.UTF-8 locale
 mkdir -p ${ROOTFS}/usr/lib/locale
