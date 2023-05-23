@@ -33,61 +33,61 @@ GNU_TARGET_NAME=x86_64-buildroot-linux-gnu
 OBJCOPY=${GNU_TARGET_NAME}-objcopy
 find . -type f -name '*.ko' | xargs -n 1 ${OBJCOPY} --strip-unneeded
 
-# # Remove unnecessary files
-# cd ${ROOTFS}
-# rm -rf linuxrc
-# rm -rf lib/bash
-# rm -rf lib/pkgconfig
-# rm -f  etc/sudoers.dist
+# Remove unnecessary files
+cd ${ROOTFS}
+rm -rf linuxrc
+rm -rf lib/bash
+rm -rf lib/pkgconfig
+rm -f  etc/sudoers.dist
 
-# # Remove unnecessary libraries
-# rm -f usr/lib/libevent.so
-# rm -f usr/lib/libevent-*
-# rm -f usr/lib/libevent_extra.so
-# rm -f usr/lib/libevent_extra-*
-# rm -f usr/lib/libevent_openssl.so
-# rm -f usr/lib/libevent_openssl-*
-# rm -f usr/lib/libform.so*
-# rm -f usr/lib/libmenu.so*
-# rm -f usr/lib/libpanel.so*
-# rm -f usr/lib/libss.so*
+# Remove unnecessary libraries
+rm -f usr/lib/libevent.so
+rm -f usr/lib/libevent-*
+rm -f usr/lib/libevent_extra.so
+rm -f usr/lib/libevent_extra-*
+rm -f usr/lib/libevent_openssl.so
+rm -f usr/lib/libevent_openssl-*
+rm -f usr/lib/libform.so*
+rm -f usr/lib/libmenu.so*
+rm -f usr/lib/libpanel.so*
+rm -f usr/lib/libss.so*
 
-# # Remove unnecessary files from e2fsprogs
-# rm -f bin/chattr
-# rm -f bin/compile_et
-# rm -f bin/lsattr
-# rm -f bin/mk_cmds
-# rm -f sbin/badblocks
-# rm -f sbin/dumpe2fs
-# rm -f sbin/e2freefrag
-# rm -f sbin/e2label
-# rm -f sbin/e2mmpstatus
-# rm -f sbin/e2scrub
-# rm -f sbin/e2scrub_all
-# rm -f sbin/e2undo
-# rm -f sbin/e4crypt
-# rm -f sbin/filefrag
-# rm -f sbin/logsave
-# rm -f sbin/mklost+found
-# rm -f sbin/tune2fs
-# rm -rf usr/share/et
-# rm -rf usr/share/ss
+# Remove unnecessary files from e2fsprogs
+rm -f bin/chattr
+rm -f bin/compile_et
+rm -f bin/lsattr
+rm -f bin/mk_cmds
+rm -f sbin/badblocks
+rm -f sbin/dumpe2fs
+rm -f sbin/e2freefrag
+rm -f sbin/e2label
+rm -f sbin/e2mmpstatus
+rm -f sbin/e2scrub
+rm -f sbin/e2scrub_all
+rm -f sbin/e2undo
+rm -f sbin/e4crypt
+rm -f sbin/filefrag
+rm -f sbin/logsave
+rm -f sbin/mklost+found
+rm -f sbin/tune2fs
+rm -rf usr/share/et
+rm -rf usr/share/ss
 
-# # Initialize directories without linking to /tmp
-# rm -rf run
-# rm -rf var/cache
-# rm -rf var/lock
-# rm -rf var/log
-# rm -rf var/run
-# rm -rf var/spool
-# rm -rf var/lib/misc
-# mkdir -p run
-# mkdir -p var/cache
-# mkdir -p var/lock
-# mkdir -p var/log
-# mkdir -p var/run
-# mkdir -p var/spool
-# mkdir -p var/lib/misc
+# Initialize directories without linking to /tmp
+rm -rf run
+rm -rf var/cache
+rm -rf var/lock
+rm -rf var/log
+rm -rf var/run
+rm -rf var/spool
+rm -rf var/lib/misc
+mkdir -p run
+mkdir -p var/cache
+mkdir -p var/lock
+mkdir -p var/log
+mkdir -p var/run
+mkdir -p var/spool
+mkdir -p var/lib/misc
 
 # # Change shell for root
 # sed -i '/^root/s!/bin/sh!/bin/bash!' ${ROOTFS}/etc/passwd
