@@ -149,7 +149,9 @@ I18NPATH=${STAGING_DIR}/usr/share/i18n:/usr/share/i18n \
     --no-archive \
     --little-endian \
     --prefix=${ROOTFS} \
-    -i POSIX -f UTF-8 C.UTF-8
+    -i POSIX -f UTF-8 C.UTF-8 2> ${ROOTFS}/../error.log
+
+cat ${ROOTFS}/../error.log >&2
 
 # I18NPATH=${STAGING_DIR}/usr/share/i18n:/usr/share/i18n \
   # /usr/bin/localedef \
