@@ -43,12 +43,60 @@ SAVE_SELF:
   # staging
   # target
 
-docker-base:
-  # FROM DOCKERFILE \
-  #   .  
+docker-base-debian:
+  FROM debian:bullseye-20210902
+
+  # Setup environment
+  ENV DEBIAN_FRONTEND noninteractive
+
+  # This repository can be a bit slow at times. Don't panic...
+  # COPY apt-sources.list /etc/apt/sources.list
+
+  # The container has no package lists, so need to update first
+  RUN dpkg --add-architecture i386 && \
+      apt-get update -y
+  RUN apt-get install -y --no-install-recommends \
+          bc \
+          build-essential \
+          bzr \
+          ca-certificates \
+          cmake \
+          cpio \
+          cvs \
+          file \
+          g++-multilib \
+          git \
+          libc6:i386 \
+          libncurses5-dev \
+          locales \
+          mercurial \
+          openssh-server \
+          python3 \
+          python3-flake8 \
+          python3-nose2 \
+          python3-pexpect \
+          python3-pytest \
+          qemu-system-arm \
+          qemu-system-x86 \
+          rsync \
+          shellcheck \
+          subversion \
+          unzip \
+          wget \
+          && \
+      apt-get -y autoremove && \
+      apt-get -y clean
+
+docker-base-ubuntu:
   # FROM ubuntu:xenial-20210804
   FROM ubuntu:bionic-20220531
 
+docker-base:
+  # FROM DOCKERFILE \
+  #   .  
+  FROM +docker-base-debian
+  # FROM +docker-base-ubuntu
+  
   ARG TERM=xterm
   ARG SYSLINUX_SITE=https://mirrors.edge.kernel.org/ubuntu/pool/main/s/syslinux
   ARG SYSLINUX_VERSION=4.05+dfsg-6+deb8u1
