@@ -62,6 +62,7 @@ docker-base:
         ca-certificates \
         bc build-essential cpio file git python unzip rsync wget \
         syslinux syslinux-common isolinux xorriso dosfstools mtools \
+        locales \
       && apt-get --assume-yes install --no-install-recommends \
         python3 jq \
       && wget -q "${SYSLINUX_SITE}/syslinux-common_${SYSLINUX_VERSION}_all.deb" \
