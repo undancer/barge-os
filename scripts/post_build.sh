@@ -139,7 +139,7 @@ mkdir -p ${ROOTFS}/usr/lib/locale
 I18NPATH=${STAGING_DIR}/usr/share/i18n:/usr/share/i18n \
   /usr/bin/localedef \
     --force \
-    --quiet \
+    # --quiet \
     --no-archive \
     --little-endian \
     --prefix=${ROOTFS} \
