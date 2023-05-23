@@ -142,6 +142,7 @@ ${STRIP} --remove-section=.comment --remove-section=.note ${ROOTFS}/usr/bin/loca
 # Install C.UTF-8 locale
 mkdir -p ${ROOTFS}/usr/lib/locale
 ls -al ${ROOTFS}/usr/lib/locale
+ls -al ${STAGING_DIR}/usr/share/i18n
 I18NPATH=${STAGING_DIR}/usr/share/i18n:/usr/share/i18n \
   /usr/bin/localedef \
     --force \
