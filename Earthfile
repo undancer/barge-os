@@ -208,7 +208,9 @@ build:
   RUN make savedefconfig
 
   # RUN --privileged make --quiet
-  RUN --privileged make
+  # RUN --privileged make --silent
+  # RUN --privileged make
+  RUN --privileged make --no-silent
 
   # RUN ls -d ./output/*
 
