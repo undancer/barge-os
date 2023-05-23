@@ -149,4 +149,7 @@ I18NPATH=${STAGING_DIR}/usr/share/i18n:/usr/share/i18n \
     --little-endian \
     --prefix=${ROOTFS} \
     -i POSIX -f UTF-8 C.UTF-8
+
+ls -al ${ROOTFS}/usr/lib/locale/
+
 mv ${ROOTFS}/usr/lib/locale/C.utf8 ${ROOTFS}/usr/lib/locale/C.UTF-8
