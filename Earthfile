@@ -111,12 +111,8 @@ docker-base:
       && apt-get --assume-yes update \
       && apt-get --assume-yes upgrade \
       && apt-get --assume-yes install --no-install-recommends \
-        ca-certificates \
-        bc build-essential cpio file git python unzip rsync wget \
+        python jq \
         syslinux syslinux-common isolinux xorriso dosfstools mtools \
-        locales \
-      && apt-get --assume-yes install --no-install-recommends \
-        python3 jq \
       && wget -q "${SYSLINUX_SITE}/syslinux-common_${SYSLINUX_VERSION}_all.deb" \
       && wget -q "${SYSLINUX_SITE}/syslinux_${SYSLINUX_VERSION}_amd64.deb" \
       && dpkg -i "syslinux-common_${SYSLINUX_VERSION}_all.deb" \
@@ -238,6 +234,31 @@ source:
 
   # SAVE ARTIFACT [--keep-ts] [--keep-own] [--if-exists] [--force] <src> [<artifact-dest-path>] [AS LOCAL <local-path>]
 
+
+toolchain:
+  FROM --allow-privileged +docker
+
+  RUN make oldconfig;
+
+  DO +COPY_SELF
+
+  RUN make toolchain;
+
+  DO +SAVE_SELF --output=./output
+
+
+sdk:
+  FROM --allow-privileged +docker
+
+  RUN make oldconfig;
+
+  DO +COPY_SELF
+
+  RUN make sdk;
+
+  DO +SAVE_SELF --output=./output
+
+
 # test:
 #   FROM --allow-privileged +docker
 
@@ -275,6 +296,8 @@ build:
 all:
   BUILD +docker
   # BUILD +source
+  # BUILD +toolchain
+  # BUILD +sdk
   BUILD +build
 
 
