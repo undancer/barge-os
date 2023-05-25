@@ -95,6 +95,19 @@ docker-base-ubuntu:
   # FROM ubuntu:xenial-20210804
   FROM ubuntu:bionic-20220531
 
+docker-base-alpine:
+  FROM library/alpine:3.18
+  RUN apk update && apk add wget
+
+docker-buildroot:
+  FROM +docker-base-alpine
+  ARG BR_VERSION=2022.05
+  # ARG BR_VERSION=2023.02.1
+  RUN wget -qO- https://buildroot.org/downloads/buildroot-${BR_VERSION}.tar.xz | tar xJ && \
+      mv buildroot-${BR_VERSION} /buildroot
+      # mv buildroot-${BR_VERSION} ${BR_ROOT}
+  SAVE ARTIFACT /buildroot
+
 docker-base:
   # FROM DOCKERFILE \
   #   .  
@@ -132,6 +145,7 @@ docker-base:
   # ARG BR_VERSION=2023.02.1
   RUN wget -qO- https://buildroot.org/downloads/buildroot-${BR_VERSION}.tar.xz | tar xJ && \
       mv buildroot-${BR_VERSION} ${BR_ROOT}
+  # COPY (+docker-buildroot/buildroot --BR_VERSION=2022.05) ${BR_ROOT}
 
   # Apply patches
   COPY patches ${SRC_DIR}/patches
@@ -236,7 +250,7 @@ source:
 
 
 toolchain:
-  FROM --allow-privileged +docker
+  FROM --allow-privileged +source
 
   RUN make oldconfig;
 
@@ -266,7 +280,8 @@ sdk:
 #   # RUN --privileged make --quiet
 
 build:
-  FROM --allow-privileged +docker
+  # FROM --allow-privileged +docker
+  FROM --allow-privileged +toolchain
 
   # RUN ../scripts/build.sh
 
@@ -295,8 +310,8 @@ build:
 
 all:
   BUILD +docker
-  # BUILD +source
-  # BUILD +toolchain
+  BUILD +source
+  BUILD +toolchain
   # BUILD +sdk
   BUILD +build
 

@@ -139,30 +139,30 @@ ${STRIP} --remove-section=.comment --remove-section=.note ${ROOTFS}/usr/bin/loca
 # ls -al ${STAGING_DIR}/usr/share
 # ls -al ${STAGING_DIR}/usr/share/i18n
 
-# Install C.UTF-8 locale
-mkdir -p ${ROOTFS}/usr/lib/locale
-ls -al ${ROOTFS}/usr/lib/locale
-ls -al ${STAGING_DIR}/usr/share/i18n
-I18NPATH=${STAGING_DIR}/usr/share/i18n:/usr/share/i18n \
-  /usr/bin/localedef \
-    --force \
-    --quiet \
-    --no-archive \
-    --little-endian \
-    --prefix=${ROOTFS} \
-    -i POSIX -f UTF-8 C.UTF-8 2> ${ROOTFS}/../error.log
-
-cat ${ROOTFS}/../error.log >&2
-
+# # Install C.UTF-8 locale
+# mkdir -p ${ROOTFS}/usr/lib/locale
+# ls -al ${ROOTFS}/usr/lib/locale
+# ls -al ${STAGING_DIR}/usr/share/i18n
 # I18NPATH=${STAGING_DIR}/usr/share/i18n:/usr/share/i18n \
-  # /usr/bin/localedef \
-    # --force \
-    # --quiet \
-    # --no-archive \
-    # --little-endian \
-    # --prefix=${ROOTFS} \
-  # /usr/bin/localedef -i POSIX -f UTF-8 C.UTF-8
+#   /usr/bin/localedef \
+#     --force \
+#     --quiet \
+#     --no-archive \
+#     --little-endian \
+#     --prefix=${ROOTFS} \
+#     -i POSIX -f UTF-8 C.UTF-8 2> ${ROOTFS}/../error.log
 
-ls -al ${ROOTFS}/usr/lib/locale
+# cat ${ROOTFS}/../error.log >&2
 
-mv ${ROOTFS}/usr/lib/locale/C.utf8 ${ROOTFS}/usr/lib/locale/C.UTF-8
+# # I18NPATH=${STAGING_DIR}/usr/share/i18n:/usr/share/i18n \
+#   # /usr/bin/localedef \
+#     # --force \
+#     # --quiet \
+#     # --no-archive \
+#     # --little-endian \
+#     # --prefix=${ROOTFS} \
+#   # /usr/bin/localedef -i POSIX -f UTF-8 C.UTF-8
+
+# ls -al ${ROOTFS}/usr/lib/locale
+
+# mv ${ROOTFS}/usr/lib/locale/C.utf8 ${ROOTFS}/usr/lib/locale/C.UTF-8
