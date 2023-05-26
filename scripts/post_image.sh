@@ -52,8 +52,8 @@ loop2=$(losetup -f)
 losetup -o 32256 $loop2 ${IMAGE}
 mkfs -t vfat -F 16 $loop2
 
-# mkdir -p ${DISK}
-# mount -t vfat $loop2 ${DISK}
+mkdir -p ${DISK}
+mount -t vfat $loop2 ${DISK}
 
 # mkdir -p ${DISK}/boot/syslinux
 # cp ${ISO}/boot/bzImage ${DISK}/boot/
