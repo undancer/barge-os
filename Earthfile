@@ -95,6 +95,48 @@ docker-base-ubuntu:
   FROM ubuntu:xenial-20210804
   # FROM ubuntu:bionic-20220531
 
+  # Setup environment
+  ENV DEBIAN_FRONTEND noninteractive
+
+  # This repository can be a bit slow at times. Don't panic...
+  # COPY apt-sources.list /etc/apt/sources.list
+
+  # The container has no package lists, so need to update first
+  RUN dpkg --add-architecture i386 && \
+      apt-get update -y
+  RUN apt-get install -y --no-install-recommends \
+          bc \
+          build-essential \
+          bzr \
+          ca-certificates \
+          cmake \
+          cpio \
+          cvs \
+          file \
+          g++-multilib \
+          git \
+          libc6:i386 \
+          libncurses5-dev \
+          locales \
+          mercurial \
+          openssh-server \
+          python3 \
+          python3-flake8 \
+          python3-nose2 \
+          python3-pexpect \
+          python3-pytest \
+          qemu-system-arm \
+          qemu-system-x86 \
+          rsync \
+          shellcheck \
+          subversion \
+          unzip \
+          wget \
+          && \
+      apt-get -y autoremove && \
+      apt-get -y clean
+
+
 docker-base-alpine:
   FROM library/alpine:3.18
   RUN apk update && apk add wget
