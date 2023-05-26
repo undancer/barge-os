@@ -126,7 +126,7 @@ docker-base:
       && apt-get --assume-yes install --no-install-recommends \
         python jq \
         syslinux syslinux-common isolinux xorriso dosfstools mtools \
-        fdisk \
+        # fdisk \
       && wget -q "${SYSLINUX_SITE}/syslinux-common_${SYSLINUX_VERSION}_all.deb" \
       && wget -q "${SYSLINUX_SITE}/syslinux_${SYSLINUX_VERSION}_amd64.deb" \
       && dpkg -i "syslinux-common_${SYSLINUX_VERSION}_all.deb" \
