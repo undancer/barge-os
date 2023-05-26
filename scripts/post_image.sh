@@ -36,10 +36,10 @@ IMAGE=${IMAGES}/barge.img
 DISK=${IMAGES}/disk
 ISO=${IMAGES}/ISO
 
-# mkdir -p ${ISO}
-# loop0=$(losetup -f)
-# losetup $loop0 ${IMAGES}/barge.iso
-# mount $loop0 ${ISO}
+mkdir -p ${ISO}
+loop0=$(losetup -f)
+losetup $loop0 ${IMAGES}/barge.iso
+mount $loop0 ${ISO}
 
 # SIZE=$(du -s ${ISO} | awk '{print $1}')
 
