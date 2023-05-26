@@ -36,6 +36,8 @@ IMAGE=${IMAGES}/barge.img
 DISK=${IMAGES}/disk
 ISO=${IMAGES}/ISO
 
+df -h .
+
 mkdir -p ${ISO}
 loop0=$(losetup -f)
 losetup $loop0 ${IMAGES}/barge.iso
