@@ -156,10 +156,10 @@ docker-base:
   # FROM +docker-base-debian
   FROM +docker-base-ubuntu
   
-  ARG TERM=xterm
-  ARG SYSLINUX_SITE=https://mirrors.edge.kernel.org/ubuntu/pool/main/s/syslinux
-  ARG SYSLINUX_VERSION=4.05+dfsg-6+deb8u1
-  # ARG SYSLINUX_VERSION=6.03+dfsg1-2
+  # ARG TERM=xterm
+  # ARG SYSLINUX_SITE=https://mirrors.edge.kernel.org/ubuntu/pool/main/s/syslinux
+  # ARG SYSLINUX_VERSION=4.05+dfsg-6+deb8u1
+  # # ARG SYSLINUX_VERSION=6.03+dfsg1-2
 
   ENV DEBIAN_FRONTEND=noninteractive
   RUN set -x \
@@ -169,12 +169,12 @@ docker-base:
         python jq \
         syslinux syslinux-common isolinux xorriso dosfstools mtools \
         # fdisk \
-      && wget -q "${SYSLINUX_SITE}/syslinux-common_${SYSLINUX_VERSION}_all.deb" \
-      && wget -q "${SYSLINUX_SITE}/syslinux_${SYSLINUX_VERSION}_amd64.deb" \
-      && dpkg -i "syslinux-common_${SYSLINUX_VERSION}_all.deb" \
-      && dpkg -i "syslinux_${SYSLINUX_VERSION}_amd64.deb" \
-      && rm -f "syslinux-common_${SYSLINUX_VERSION}_all.deb" \
-      && rm -f "syslinux_${SYSLINUX_VERSION}_amd64.deb" \
+      # && wget -q "${SYSLINUX_SITE}/syslinux-common_${SYSLINUX_VERSION}_all.deb" \
+      # && wget -q "${SYSLINUX_SITE}/syslinux_${SYSLINUX_VERSION}_amd64.deb" \
+      # && dpkg -i "syslinux-common_${SYSLINUX_VERSION}_all.deb" \
+      # && dpkg -i "syslinux_${SYSLINUX_VERSION}_amd64.deb" \
+      # && rm -f "syslinux-common_${SYSLINUX_VERSION}_all.deb" \
+      # && rm -f "syslinux_${SYSLINUX_VERSION}_amd64.deb" \
       && apt-get clean \
       && rm -rf /var/cache/apt/* /var/lib/apt/lists/* /var/cache/debconf/* /var/log/*
 
