@@ -340,8 +340,7 @@ build:
 
   # RUN --privileged make --quiet
   # RUN --privileged make --silent
-  # RUN --privileged make
-  RUN --privileged make --no-silent
+  RUN --privileged make
 
   # RUN ls -d ./output/*
 
