@@ -48,9 +48,9 @@ loop1=$(losetup -f)
 losetup $loop1 ${IMAGE}
 (echo c; echo n; echo p; echo 1; echo; echo; echo t; echo 4; echo a; echo w;) | fdisk $loop1 || true
 
-# loop2=$(losetup -f)
-# losetup -o 32256 $loop2 ${IMAGE}
-# mkfs -t vfat -F 16 $loop2
+loop2=$(losetup -f)
+losetup -o 32256 $loop2 ${IMAGE}
+mkfs -t vfat -F 16 $loop2
 
 # mkdir -p ${DISK}
 # mount -t vfat $loop2 ${DISK}
