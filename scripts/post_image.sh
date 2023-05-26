@@ -62,12 +62,12 @@ cp ${ISO}/boot/isolinux/isolinux.cfg ${DISK}/boot/syslinux/syslinux.cfg
 umount ${ISO}
 umount ${DISK}
 
-# syslinux -i -d /boot/syslinux $loop2 2> ${IMAGES}/error.log
-# cat ${IMAGES}/error.log >&2
-# losetup -d $loop2
-# dd if=/usr/lib/syslinux/mbr.bin of=$loop1 bs=440 count=1
-# losetup -d $loop1
-# losetup -d $loop0
+syslinux -i -d /boot/syslinux $loop2 2> ${IMAGES}/error.log
+cat ${IMAGES}/error.log >&2
+losetup -d $loop2
+dd if=/usr/lib/syslinux/mbr.bin of=$loop1 bs=440 count=1
+losetup -d $loop1
+losetup -d $loop0
 
 # if [ -s ${IMAGES}/error.log ]; then
 #   exit 1
