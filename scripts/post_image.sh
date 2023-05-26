@@ -41,12 +41,12 @@ loop0=$(losetup -f)
 losetup $loop0 ${IMAGES}/barge.iso
 mount $loop0 ${ISO}
 
-# SIZE=$(du -s ${ISO} | awk '{print $1}')
+SIZE=$(du -s ${ISO} | awk '{print $1}')
 
-# dd if=/dev/zero of=${IMAGE} bs=1024 count=$((${SIZE}+68+${SIZE}%2))
-# loop1=$(losetup -f)
-# losetup $loop1 ${IMAGE}
-# (echo c; echo n; echo p; echo 1; echo; echo; echo t; echo 4; echo a; echo w;) | fdisk $loop1 || true
+dd if=/dev/zero of=${IMAGE} bs=1024 count=$((${SIZE}+68+${SIZE}%2))
+loop1=$(losetup -f)
+losetup $loop1 ${IMAGE}
+(echo c; echo n; echo p; echo 1; echo; echo; echo t; echo 4; echo a; echo w;) | fdisk $loop1 || true
 
 # loop2=$(losetup -f)
 # losetup -o 32256 $loop2 ${IMAGE}
