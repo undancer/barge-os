@@ -71,5 +71,5 @@ losetup -d $loop0
 
 if [ -s ${IMAGES}/error.log ]; then
   cat ${IMAGES}/error.log
-#   exit 1
+  exit 1
 fi
