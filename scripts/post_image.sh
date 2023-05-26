@@ -69,6 +69,7 @@ dd if=/usr/lib/syslinux/mbr.bin of=$loop1 bs=440 count=1
 losetup -d $loop1
 losetup -d $loop0
 
-# if [ -s ${IMAGES}/error.log ]; then
+if [ -s ${IMAGES}/error.log ]; then
+  cat ${IMAGES}/error.log
 #   exit 1
-# fi
+fi
