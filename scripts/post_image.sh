@@ -72,8 +72,8 @@ losetup -d $loop1
 losetup -d $loop0
 
 if [ -s ${IMAGES}/error.log ]; then
-  cat "----------SIGN----------"
+  echo "----------SIGN----------"
   cat ${IMAGES}/error.log
-  cat "----------SIGN----------"
+  echo "----------SIGN----------"
   exit 1
 fi
