@@ -92,8 +92,8 @@ docker-base-debian:
       apt-get -y clean
 
 docker-base-ubuntu:
-  # FROM ubuntu:xenial-20210804
-  FROM ubuntu:bionic-20220531
+  FROM ubuntu:xenial-20210804
+  # FROM ubuntu:bionic-20220531
 
 docker-base-alpine:
   FROM library/alpine:3.18
@@ -111,8 +111,8 @@ docker-buildroot:
 docker-base:
   # FROM DOCKERFILE \
   #   .  
-  FROM +docker-base-debian
-  # FROM +docker-base-ubuntu
+  # FROM +docker-base-debian
+  FROM +docker-base-ubuntu
   
   ARG TERM=xterm
   ARG SYSLINUX_SITE=https://mirrors.edge.kernel.org/ubuntu/pool/main/s/syslinux
