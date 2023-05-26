@@ -20,16 +20,16 @@ cp /usr/lib/syslinux/linux.c32 ${ISO}/boot/isolinux/ldlinux.c32
 
 cp /build/configs/isolinux.cfg ${ISO}/boot/isolinux/
 
-# # Make an ISO
-# cd ${ISO}
-# xorriso \
-#   -publisher "A.I. <ailis@paw.zone>" \
-#   -as mkisofs \
-#   -l -J -R -V "BARGE" \
-#   -no-emul-boot -boot-load-size 4 -boot-info-table \
-#   -b boot/isolinux/isolinux.bin -c boot/isolinux/boot.cat \
-#   -isohybrid-mbr /usr/lib/syslinux/isohdpfx.bin \
-#   -no-pad -o ${IMAGES}/barge.iso $(pwd)
+# Make an ISO
+cd ${ISO}
+xorriso \
+  -publisher "A.I. <ailis@paw.zone>" \
+  -as mkisofs \
+  -l -J -R -V "BARGE" \
+  -no-emul-boot -boot-load-size 4 -boot-info-table \
+  -b boot/isolinux/isolinux.bin -c boot/isolinux/boot.cat \
+  -isohybrid-mbr /usr/lib/syslinux/isohdpfx.bin \
+  -no-pad -o ${IMAGES}/barge.iso $(pwd)
 
 # # Make a bootable disk image
 # IMAGE=${IMAGES}/barge.img
