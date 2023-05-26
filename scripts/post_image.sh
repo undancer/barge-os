@@ -55,12 +55,12 @@ mkfs -t vfat -F 16 $loop2
 mkdir -p ${DISK}
 mount -t vfat $loop2 ${DISK}
 
-# mkdir -p ${DISK}/boot/syslinux
-# cp ${ISO}/boot/bzImage ${DISK}/boot/
-# cp ${ISO}/boot/initrd ${DISK}/boot/
-# cp ${ISO}/boot/isolinux/isolinux.cfg ${DISK}/boot/syslinux/syslinux.cfg
-# umount ${ISO}
-# umount ${DISK}
+mkdir -p ${DISK}/boot/syslinux
+cp ${ISO}/boot/bzImage ${DISK}/boot/
+cp ${ISO}/boot/initrd ${DISK}/boot/
+cp ${ISO}/boot/isolinux/isolinux.cfg ${DISK}/boot/syslinux/syslinux.cfg
+umount ${ISO}
+umount ${DISK}
 
 # syslinux -i -d /boot/syslinux $loop2 2> ${IMAGES}/error.log
 # cat ${IMAGES}/error.log >&2
