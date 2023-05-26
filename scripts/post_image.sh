@@ -31,10 +31,10 @@ xorriso \
   -isohybrid-mbr /usr/lib/syslinux/isohdpfx.bin \
   -no-pad -o ${IMAGES}/barge.iso $(pwd)
 
-# # Make a bootable disk image
-# IMAGE=${IMAGES}/barge.img
-# DISK=${IMAGES}/disk
-# ISO=${IMAGES}/ISO
+# Make a bootable disk image
+IMAGE=${IMAGES}/barge.img
+DISK=${IMAGES}/disk
+ISO=${IMAGES}/ISO
 
 # mkdir -p ${ISO}
 # loop0=$(losetup -f)
