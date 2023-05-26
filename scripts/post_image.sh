@@ -15,8 +15,10 @@ cd ${ROOTFS}
 find | cpio -H newc -o | xz -9 -C crc32 -c > ${ISO}/boot/initrd
 
 mkdir -p ${ISO}/boot/isolinux
-cp /usr/lib/syslinux/isolinux.bin ${ISO}/boot/isolinux/
-cp /usr/lib/syslinux/linux.c32 ${ISO}/boot/isolinux/ldlinux.c32
+# cp /usr/lib/syslinux/isolinux.bin ${ISO}/boot/isolinux/
+# cp /usr/lib/syslinux/linux.c32 ${ISO}/boot/isolinux/ldlinux.c32
+cp /usr/lib/ISOLINUX/isolinux.bin ${ISO}/boot/isolinux/
+cp /usr/lib/syslinux/modules/bios/ldlinux.c32 ${ISO}/boot/isolinux/ldlinux.c32
 
 cp /build/configs/isolinux.cfg ${ISO}/boot/isolinux/
 
