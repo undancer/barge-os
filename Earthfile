@@ -153,8 +153,8 @@ docker-buildroot:
 docker-base:
   # FROM DOCKERFILE \
   #   .  
-  # FROM +docker-base-debian
-  FROM +docker-base-ubuntu
+  FROM +docker-base-debian
+  # FROM +docker-base-ubuntu
   
   # ARG TERM=xterm
   # ARG SYSLINUX_SITE=https://mirrors.edge.kernel.org/ubuntu/pool/main/s/syslinux
