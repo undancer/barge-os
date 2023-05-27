@@ -29,7 +29,9 @@ xorriso \
   -as mkisofs \
   -l -J -R -V "BARGE" \
   -no-emul-boot -boot-load-size 4 -boot-info-table \
-  -b boot/isolinux/isolinux.bin -c boot/isolinux/boot.cat \
+  # -b boot/isolinux/isolinux.bin \
+  -b ${ISO}/boot/isolinux/isolinux.bin \
+  -c boot/isolinux/boot.cat \
   # -isohybrid-mbr /usr/lib/syslinux/isohdpfx.bin \
   -isohybrid-mbr /usr/lib/ISOLINUX/isohdpfx.bin \
   -no-pad -o ${IMAGES}/barge.iso $(pwd)
