@@ -103,6 +103,7 @@ jobs:
           name: my-artifact
           path: |
             ./output/images/
+            ./output/buildroot.*
 
   # build1:
   #   runs-on: ubuntu-latest

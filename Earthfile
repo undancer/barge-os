@@ -35,7 +35,8 @@ SAVE_SELF:
   SAVE ARTIFACT --if-exists ./dl/* AS LOCAL ./output/dl/
   SAVE ARTIFACT --if-exists ./ccache/* AS LOCAL ./output/ccache/
   SAVE ARTIFACT --if-exists ./.config AS LOCAL ./output/buildroot.config
-  SAVE ARTIFACT --if-exists ./defconfig AS LOCAL ./output/buildroot.defconfig
+  # SAVE ARTIFACT --if-exists ./defconfig AS LOCAL ./output/buildroot.defconfig
+  # SAVE ARTIFACT --if-exists ./output/buildroot.defconfig AS LOCAL ./output/buildroot.defconfig
 
   # build
   # host
@@ -336,7 +337,7 @@ build:
 
   DO +COPY_SELF
 
-  RUN make savedefconfig
+  RUN make BR2_DEFCONFIG=./output/buildroot.defconfig savedefconfig
 
   # RUN --privileged make --quiet
   # RUN --privileged make --silent
